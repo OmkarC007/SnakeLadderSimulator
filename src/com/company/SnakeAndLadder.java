@@ -19,15 +19,17 @@ public class SnakeAndLadder {
 
 
         int playerPosition = 0;
-        for (int i=0; i<=winningPosition ; i++){
+
+        while(playerPosition < winningPosition){
 
             int diceRoll =(int) (Math.floor(Math.random() *10 )%6) + 1;
             int playerOption   = (int) (Math.floor(Math.random() * 10 )% 3);
 
             switch (playerOption){
                 case ladder :
-                    playerPosition = playerPosition +diceRoll;
-                    System.out.println(playerPosition);
+                    if((playerPosition + diceRoll) <= winningPosition){
+                        playerPosition = playerOption + diceRoll;
+                    }
                     break;
                 case snake :
                     if((playerPosition - diceRoll) <= startPosition){
@@ -39,7 +41,7 @@ public class SnakeAndLadder {
                 default:
                     break;
             }
-        System.out.println("player Position" +playerPosition);
+            System.out.println("player Position" +playerPosition);
         }
     }
 }
