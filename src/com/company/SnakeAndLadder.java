@@ -8,40 +8,68 @@ import java.lang.management.MemoryType;
 public class SnakeAndLadder {
 
 
-    public static void main(String[] args) {
-        System.out.println("Welcome To Snake And Ladder Simulator ");
+    public static void main(String[] args)
+    {
+        System.out.println( "WelCome To Snake Ladder Simulator" );
+//	CONSTANTS
+        int START_POSITION = 0;
+        final int NO_PLAY = 0 ;
+        final int LADDER = 1 ;
+        final int SNAKE = 2 ;
+        final int GOAL = 100 ;
 
-        int startPosition = 0;
-        final int noPlay = 0;
-        final int ladder = 1;
-        final int snake = 2;
-        final int winningPosition = 100;
+//	variable
+        int PlayerPosition = 0 ;
+        int DicePlayedTimes = 0 ;
 
+//	EXPRESIONS
+        while( PlayerPosition < GOAL )
+        {
+            int DiceRoll = (int) (Math.floor(Math.random() * 10 ) % 6) + 1 ;
 
-        int playerPosition = 0;
+            DicePlayedTimes++ ;
 
-        while(playerPosition < winningPosition){
+            int PlayerOption = (int) Math.floor(Math.random() * 10 ) % 3 ;
 
-            int diceRoll =(int) (Math.floor(Math.random() *10 )%6) + 1;
-            int playerOption   = (int) (Math.floor(Math.random() * 10 )% 3);
+            System.out.println("Dice value " + DiceRoll);
 
-            switch (playerOption){
-                case ladder :
-                    if((playerPosition + diceRoll) <= winningPosition){
-                        playerPosition = playerOption + diceRoll;
+            switch ( PlayerOption )
+            {
+
+                case LADDER :
+                    System.out.println( "Player Choose Ladder  " );
+
+                    if ( ( PlayerPosition + DiceRoll ) <= GOAL )
+                    {
+
+                        PlayerPosition = PlayerPosition + DiceRoll;
+                    }
+
+                    break;
+
+                case SNAKE :
+                    System.out.println( "Player Choose Snake  " );
+
+                    if ( ( PlayerPosition - DiceRoll ) <= START_POSITION )
+                    {
+                        PlayerPosition = START_POSITION ;
+                    }
+                    else
+                    {
+                        PlayerPosition = PlayerPosition - DiceRoll ;
                     }
                     break;
-                case snake :
-                    if((playerPosition - diceRoll) <= startPosition){
-                        playerPosition = startPosition;
-                    }else{
-                        playerPosition = playerPosition -diceRoll;
-                    }
-                    break;
+
                 default:
+                    System.out.println( "Player Choose No Play  " );
+
                     break;
             }
-            System.out.println("player Position" +playerPosition);
+            System.out.println("Player Position " + PlayerPosition + "\n --------");
         }
+
+        System.out.println("The Number Of times played "+ DicePlayedTimes  );
+
     }
+
 }
